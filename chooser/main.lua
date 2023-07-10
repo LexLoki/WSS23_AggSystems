@@ -1,9 +1,11 @@
 local Camera = require 'camera'
+local Parser = require 'parser'
 local camera
 
 local canvas
 
 local cellList = {}
+
 
 local CTYPE = {
     ON = 1, OPEN = 2, OFF = 3
@@ -86,10 +88,30 @@ local function addRandom()
     addCell(cell[1], cell[2], CTYPE.ON)
 end
 
-function love.load()
+local function reset()
+    iteration,auto,cellList = 1,false,{}
+end
+
+local function loadConfig(crule, cinitial)
+    if crule then
+        local argRule = Parser.parse_rule(tonumber(crule))
+        for i=1,#rule do
+            rule[i] = argRule[i] or 0
+        end
+    end
+    local cells = Parser.parse_initial(cinitial)
+    for _,cell in ipairs(cells) do
+        addCell(cell[1], cell[2], CTYPE.ON)
+    end
+end
+
+function love.load(arg)
     love.window.setMode(1800,1000)
     W,H = love.graphics.getDimensions()
-    addCell(0, 0, CTYPE.ON)
+    reset()
+    if arg[1] then
+        loadConfig(arg[1], arg[2])
+    else addCell(0, 0, CTYPE.ON) end
     camera = Camera.new(0,0,{W/2,H/2})
     canvas = love.graphics.newCanvas(W,H)
     love.graphics.setCanvas(canvas)
@@ -122,8 +144,7 @@ end
 
 function love.keypressed(key)
     if key == 'escape' then
-        iteration = 1
-        cellList = {}
+        reset()
         return
     end
     if key == 'r' then
