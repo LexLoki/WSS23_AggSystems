@@ -1,0 +1,99 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='WolframDesktop 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       161,          7]
+NotebookDataLength[      2842,         89]
+NotebookOptionsPosition[      2488,         75]
+NotebookOutlinePosition[      2892,         91]
+CellTagsIndexPosition[      2849,         88]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CellCanonicalizeRotations", "[", "cells_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "dim", ",", "mins", ",", "positive", ",", "array", ",", "canonarray"}], 
+     "}"}], ",", 
+    RowBox[{
+     RowBox[{"dim", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"Max", "[", "#", "]"}], "-", 
+         RowBox[{"Min", "[", "#", "]"}], "+", "1"}], "&"}], "/@", 
+       RowBox[{"Transpose", "[", "cells", "]"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"mins", "=", 
+      RowBox[{"Min", "/@", 
+       RowBox[{"Transpose", "[", "cells", "]"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"positive", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"#", "-", "mins", "+", "1"}], "&"}], "/@", "cells"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"array", "=", 
+      RowBox[{
+       RowBox[{"ResourceFunction", "[", "\"\<ArrayRotations\>\"", "]"}], "@", 
+       RowBox[{
+        RowBox[{"ResourceFunction", "[", "\"\<ArrayCrop\>\"", "]"}], "@", 
+        RowBox[{"ReplacePart", "[", 
+         RowBox[{
+          RowBox[{"ConstantArray", "[", 
+           RowBox[{"0", ",", "dim"}], "]"}], ",", 
+          RowBox[{"positive", "->", "1"}]}], "]"}]}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"canonarray", " ", "=", " ", 
+      RowBox[{"Fold", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Order", "[", 
+             RowBox[{"#1", ",", "#2"}], "]"}], "==", "1"}], ",", "#1", ",", 
+           "#2"}], "]"}], "&"}], ",", 
+        RowBox[{"First", "@", "array"}], ",", "array"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Position", "[", 
+       RowBox[{"canonarray", ",", "1"}], "]"}], "-", "1"}]}]}], 
+   "]"}]}]], "Input",ExpressionUUID->"7c8163b6-5f05-4a8f-b54d-f3f406b58cd3"]
+},
+WindowSize->{1428., 831.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (January 31, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"fce169c7-5934-4593-9f6e-42c5d5b1c76c"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[561, 20, 1923, 53, 124, "Input",ExpressionUUID->"7c8163b6-5f05-4a8f-b54d-f3f406b58cd3"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

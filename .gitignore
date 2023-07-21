@@ -1,3 +1,4 @@
-chooser/bin
+simulator/bin
+simulator_game/bin
 *.zip
 *test*
